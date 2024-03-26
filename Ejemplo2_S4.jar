@@ -1,0 +1,62 @@
+
+package ejemplo2_s4;
+
+import java.util.Scanner;
+
+public class Ejemplo2_S4 {
+
+
+    public static void main(String[] args) {
+    
+        
+    System.out.println("""
+                       Hola! En que ubicacion deseas comprar tu entrada?
+                       Presiona [1] si quieres comprar G-H
+                       Presiona [2] si quieres comprar B-C
+                       Presiona [3] si quieres comprar A-I
+                       Presiona [4] si quieres comprar D-F
+                       Presiona [5] si quieres comprar E-J
+              """);
+     
+    Scanner teclado = new Scanner(System.in);
+    
+    int entrada = teclado.nextInt();
+    
+    System.out.println("Es usted abonado?");
+    System.out.println("Presiona [1] si eres abonado");
+    System.out.println("Presiona [0] si no eres abonado");
+    
+    int cliente = teclado.nextInt();
+    
+   int precioFinal = calcularPrecioEntrada(entrada, cliente);
+   System.out.println("***El precio de la entrada es: $" + precioFinal + "***");       
+    }
+    
+    // Metodo que calcula el precio de la entrada
+    private static int calcularPrecioEntrada(int ubicacion, int tipoCliente){
+        int precioBase = 0;
+        switch(ubicacion){
+            case 1 -> precioBase = 35000;
+            case 2 -> precioBase = 30000;
+            case 3 -> precioBase = 25000;
+            case 4 -> precioBase = 22000;
+            case 5 -> precioBase = 18000;
+        }
+        int descuento = tipoCliente == 0 ? 0 : 10000;
+        
+        if (
+                tipoCliente == 1 && ubicacion==3
+                ){
+            descuento = 7000;
+        }else if (
+                tipoCliente == 1 && 
+                (ubicacion==4 || ubicacion ==5)
+                ){
+            descuento = 6000;
+        }
+        
+        return precioBase - descuento;
+    }
+    
+    
+}
